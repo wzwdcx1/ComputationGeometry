@@ -1,0 +1,109 @@
+# Visual Studio 相关
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# 编译输出
+/bin/
+/obj/
+/packages/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.nupkg
+
+# 测试相关
+/TestResults/
+*.coverage
+*.coveragexml
+*.trx
+
+# 日志文件
+*.log
+*.logs
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.assets.json
+
+# 用户配置文件
+*.user
+*.userprefs
+*.csproj.user
+
+# IDE 相关
+_ReSharper.Caches/
+.idea/
+*.sln.ide
+*.sln.ideuser
+
+# 构建结果
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# 代码覆盖率
+*.coverage
+*.coveragexml
+*.dotCover
+*.trx
+*.TestResults
+
+# 文档
+[Dd]ocumentation/
+[Dd]ocs/
+
+# 本地配置文件
+appsettings.Development.json
+appsettings.Local.json
+*.local.json
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 临时文件
+*~
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Windows 系统文件
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 备份文件
+*.bak
+*.orig
+*.old
+
+# 性能分析文件
+*.diagsession
+*.vsp
+*.vspscc
+*.vspx
+*.sarif
+
+# 发布文件
+/publish/
+*.deploy
+*.deploy.cmd
