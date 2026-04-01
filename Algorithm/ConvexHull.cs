@@ -24,24 +24,56 @@ namespace ComputationGeometry.Algorithm
             }
             //按照x排序
             QuickSortByX(points);
-            List<Point2d> upConvexHull = [ points[0], points[1] ];
 
+            List<Point2d> upConvexHull = [ points[0], points[1] ];
             for (int i = 2; i < points.Count; i++)
             {
                 Point2d nextP = points[i];
-                int count = upConvexHull.Count;
-                Vector2d curV = upConvexHull[count - 1] - upConvexHull[count - 2];
-                Vector2d nextV = nextP - upConvexHull[count - 1];
-                Orientation orientation = Compute.GetOrientationOfVectors(curV, nextV);
-                if (!orientation.Equals(Orientation.Right))
-                {
-                    upConvexHull.Remove(upConvexHull.Last());
-
-                }
-
-
+                ToOrientationVectors(upConvexHull, nextP, Orientation.Right);
             }
 
+            List<Point2d> downConvexHull = [points[points.Count - 1], points[points.Count - 2]];
+            for (int i = points.Count - 3; i > -1; i--)
+            {
+                Point2d nextP = points[i];
+                ToOrientationVectors(downConvexHull, nextP, Orientation.Right);
+            }
+            downConvexHull.RemoveAt(0);
+            downConvexHull.RemoveAt(downConvexHull.Count - 1);
+
+            upConvexHull.AddRange(downConvexHull);
+            return upConvexHull;
+        }
+        /// <summary>
+        /// 将原本固定方向点集添加一个点之后依然保持固定方向
+        /// </summary>
+        /// <param name="points"></param>
+        private static void ToOrientationVectors(List<Point2d> points, Point2d newP, Orientation orgOrientation)
+        {
+            if (points == null)
+            {
+                return;
+            }
+            while(points.Count >= 2)
+            {
+                int lastIndex = points.Count - 1;
+                Vector2d v1 = points[lastIndex - 1] - points[lastIndex - 2];
+                Vector2d v2 = newP - points[lastIndex];
+                Orientation curOrientation = GetOrientationOfVectors(v1, v2);
+                if (!curOrientation.Equals(orgOrientation))
+                {
+                    points.RemoveAt(lastIndex);
+                }
+                else
+                {
+                    points.Add(newP);
+                    return;
+                }
+            }
+            if (points.Count == 1)
+            {
+                points.Add(newP);
+            }
         }
         /// <summary>
         /// 快速排序非递归实现
